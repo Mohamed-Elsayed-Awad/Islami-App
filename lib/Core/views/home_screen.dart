@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/Core/model/tap_info.dart';
 import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
+import 'package:islami_app/Core/utils/app_font.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "HomeScreen";
@@ -28,9 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Text(
             'Hadeth',
             style: TextStyle(
+                fontFamily: AppFont.appFont,
                 color: AppColor.accentColor,
                 fontSize: 30,
-                fontWeight: FontWeight.bold),
+                fontWeight: AppFont.appFontBold),
           ),
         )),
     TapInfo(
@@ -41,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
           'Sebha',
           style: TextStyle(
+              fontFamily: AppFont.appFont,
               color: AppColor.accentColor,
               fontSize: 30,
               fontWeight: FontWeight.bold),
@@ -53,6 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
           'Radio',
           style: TextStyle(
+              fontFamily: AppFont.appFont,
               color: AppColor.accentColor,
               fontSize: 30,
               fontWeight: FontWeight.bold),
@@ -65,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text(
           'Time',
           style: TextStyle(
+              fontFamily: AppFont.appFont,
               color: AppColor.accentColor,
               fontSize: 30,
               fontWeight: FontWeight.bold),
@@ -85,7 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
           bottomNavigationBar: NavigationBarTheme(
             data: NavigationBarThemeData(
               labelTextStyle: WidgetStatePropertyAll(
-                TextStyle(color: AppColor.accentColor),
+                TextStyle(
+                    color: AppColor.accentColor,
+                    fontFamily: AppFont.appFont,
+                    fontWeight: AppFont.appFontNormal),
               ),
             ),
             child: NavigationBar(
@@ -147,6 +155,86 @@ class QuranScreen extends StatelessWidget {
         SliverToBoxAdapter(
           child: Image.asset(AppAssets.topText),
         ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+                cursorColor: AppColor.accentColor,
+                decoration: InputDecoration(
+                    hintText: "Sura Name",
+                    hintStyle: TextStyle(
+                      fontFamily: AppFont.appFont,
+                      color: AppColor.accentColor,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: AppColor.primaryColor),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: AppColor.primaryColor),
+                    ),
+                    prefixIcon: ImageIcon(
+                      AssetImage(AppAssets.quranIcon),
+                      size: 24,
+                    ),
+                    prefixIconColor: AppColor.primaryColor)),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20.0, top: 20, bottom: 10),
+            child: Text(
+              "Most Recently",
+              style: TextStyle(
+                  color: AppColor.accentColor,
+                  fontSize: 16,
+                  fontFamily: AppFont.appFont,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColor.primaryColor,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      "Al-Anbiya",
+                      style: TextStyle(
+                          fontFamily: AppFont.appFont,
+                          fontWeight: AppFont.appFontBold,
+                          color: AppColor.secondaryColor,
+                          fontSize: 24),
+                    ),
+                    Text(
+                      "الأنبياء",
+                      style: TextStyle(
+                          fontFamily: AppFont.appFont,
+                          fontWeight: AppFont.appFontSemiBold,
+                          color: AppColor.secondaryColor,
+                          fontSize: 24),
+                    ),
+                    Text(
+                      "112 Verses",
+                      style: TextStyle(
+                          fontFamily: AppFont.appFont,
+                          fontWeight: AppFont.appFontSemiBold,
+                          color: AppColor.secondaryColor,
+                          fontSize: 14),
+                    ),
+                  ],
+                ),
+                Image.asset("assets/img_most_recent.png")
+              ],
+            ),
+          ),
+        )
       ],
     );
   }

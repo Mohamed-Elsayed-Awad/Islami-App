@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
+import 'package:islami_app/Core/utils/app_font.dart';
 
 class BoardScreen extends StatelessWidget {
   const BoardScreen(
@@ -30,14 +31,22 @@ class BoardScreen extends StatelessWidget {
           ),
           Text(
             headline,
-            style: TextStyle(color: AppColor.primaryColor, fontSize: 24),
+            style: TextStyle(
+                color: AppColor.primaryColor,
+                fontSize: 24,
+                fontFamily: AppFont.appFont,
+                fontWeight: AppFont.appFontNormal),
           ),
           SizedBox(
             height: 40,
           ),
           Text(
             text,
-            style: TextStyle(color: AppColor.primaryColor, fontSize: 20),
+            style: TextStyle(
+                color: AppColor.primaryColor,
+                fontSize: 20,
+                fontFamily: AppFont.appFont,
+                fontWeight: AppFont.appFontNormal),
             textAlign: TextAlign.center,
           ),
           SizedBox(

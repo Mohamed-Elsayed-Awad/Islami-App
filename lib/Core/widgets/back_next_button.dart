@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
+import 'package:islami_app/Core/utils/app_font.dart';
 
 class BackNextButton extends StatelessWidget {
   const BackNextButton(
@@ -18,7 +19,10 @@ class BackNextButton extends StatelessWidget {
           overlayColor: WidgetStatePropertyAll(Colors.transparent)),
       child: Text(
         text,
-        style: TextStyle(color: AppColor.primaryColor),
+        style: TextStyle(
+            color: AppColor.primaryColor,
+            fontFamily: AppFont.appFont,
+            fontWeight: AppFont.appFontBold),
       ),
     );
   }
