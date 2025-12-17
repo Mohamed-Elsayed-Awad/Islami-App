@@ -3,6 +3,9 @@ import 'package:islami_app/Core/model/tap_info.dart';
 import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
 import 'package:islami_app/Core/utils/app_font.dart';
+import 'package:islami_app/Core/widgets/custom_head_text.dart';
+import 'package:islami_app/Core/widgets/custom_text_of_sura.dart';
+import 'package:islami_app/Core/widgets/custom_text_of_verse.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "HomeScreen";
@@ -146,7 +149,11 @@ class QuranScreen extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
-          child: Image.asset(AppAssets.topText),
+          child: Image.asset(
+            width: 200,
+            height: 200,
+            AppAssets.topText,
+          ),
         ),
         SliverToBoxAdapter(
           child: Padding(
@@ -187,17 +194,68 @@ class QuranScreen extends StatelessWidget {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(top: 20.0, left: 20, bottom: 10),
-            child: Text(
-              "Most Recently",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: AppColor.accentColor,
-                  fontFamily: AppFont.jannaLt,
-                  fontWeight: AppFont.jannaLtBold),
+            child: CustomHeadText(
+              text: "Most Recently",
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: 120,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return MostRecentlySura(
+                  englsihName: 'Al-Anbiya',
+                  arabicName: 'الأنبياء',
+                  verses: '112 Verses',
+                );
+              },
+              itemCount: 5,
             ),
           ),
         )
       ],
+    );
+  }
+}
+
+class MostRecentlySura extends StatelessWidget {
+  const MostRecentlySura({
+    super.key,
+    required this.englsihName,
+    required this.arabicName,
+    required this.verses,
+  });
+  final String englsihName;
+  final String arabicName;
+  final String verses;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0),
+      child: Container(
+        padding: EdgeInsets.all(8),
+        height: 120,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: AppColor.primaryColor),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                CustomTextOfSura(text: englsihName),
+                CustomTextOfSura(text: arabicName),
+                CustomTextOfVerse(
+                    text: verses, fontSize: 14, color: AppColor.secondaryColor)
+              ],
+            ),
+            Image.asset("assets/img_most_recent.png"),
+          ],
+        ),
+      ),
     );
   }
 }
