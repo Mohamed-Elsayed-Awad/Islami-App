@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/Core/utils/app_color.dart';
 import 'package:islami_app/Core/utils/app_font.dart';
 
 class CustomTextOfSura extends StatelessWidget {
-  const CustomTextOfSura({super.key, required this.text});
+  const CustomTextOfSura(
+      {super.key,
+      required this.text,
+      required this.color,
+      required this.fontSize});
   final String text;
+  final Color color;
+  final double fontSize;
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
         fontFamily: AppFont.jannaLt,
-        color: AppColor.secondaryColor,
-        fontSize: 24,
+        color: color,
+        fontSize: fontSize,
         fontWeight: AppFont.jannaLtBold,
       ),
     );

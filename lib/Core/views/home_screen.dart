@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/Core/model/sura_model.dart';
 import 'package:islami_app/Core/model/tap_info.dart';
 import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
@@ -142,8 +143,17 @@ customNavigationDistination(
 }
 
 class QuranScreen extends StatelessWidget {
-  const QuranScreen({super.key});
-
+  QuranScreen({super.key});
+  List<SuraItem> listOfSura = [
+    SuraItem(
+      suraModel: SuraModel(
+        suraNumber: '1',
+        englishName: 'Al-Fatiha',
+        arabicName: 'الفاتحة',
+        verses: '7 Verses',
+      ),
+    )
+  ];
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -203,6 +213,7 @@ class QuranScreen extends StatelessWidget {
           child: SizedBox(
             height: 120,
             child: ListView.builder(
+              padding: EdgeInsets.only(left: 20),
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return MostRecentlySura(
@@ -214,8 +225,87 @@ class QuranScreen extends StatelessWidget {
               itemCount: 5,
             ),
           ),
-        )
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: CustomHeadText(text: "Sura List"),
+          ),
+        ),
+        SliverList.separated(
+          itemBuilder: (context, index) {
+            return listOfSura[0];
+          },
+          itemCount: 20,
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider(
+              indent: 64,
+              endIndent: 50,
+              color: AppColor.accentColor,
+            );
+          },
+        ),
       ],
+    );
+  }
+}
+
+class SuraItem extends StatelessWidget {
+  const SuraItem({
+    super.key,
+    required this.suraModel,
+  });
+  final SuraModel suraModel;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    "assets/img_sur_number_frame.png",
+                  ),
+                  Text(
+                    suraModel.suraNumber,
+                    style: TextStyle(
+                        color: AppColor.accentColor,
+                        fontFamily: AppFont.jannaLt,
+                        fontSize: 14,
+                        fontWeight: AppFont.jannaLtBold),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 24,
+              ),
+              Column(
+                children: [
+                  CustomTextOfSura(
+                    text: suraModel.englishName,
+                    color: AppColor.accentColor,
+                    fontSize: 20,
+                  ),
+                  CustomTextOfVerse(
+                      text: suraModel.verses,
+                      fontSize: 14,
+                      color: AppColor.accentColor)
+                ],
+              ),
+            ],
+          ),
+          CustomTextOfSura(
+            text: suraModel.arabicName,
+            color: AppColor.accentColor,
+            fontSize: 20,
+          )
+        ],
+      ),
     );
   }
 }
@@ -233,7 +323,7 @@ class MostRecentlySura extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0),
+      padding: const EdgeInsets.only(right: 8.0),
       child: Container(
         padding: EdgeInsets.all(8),
         height: 120,
@@ -246,8 +336,16 @@ class MostRecentlySura extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CustomTextOfSura(text: englsihName),
-                CustomTextOfSura(text: arabicName),
+                CustomTextOfSura(
+                  text: englsihName,
+                  color: AppColor.secondaryColor,
+                  fontSize: 24,
+                ),
+                CustomTextOfSura(
+                  text: arabicName,
+                  color: AppColor.secondaryColor,
+                  fontSize: 24,
+                ),
                 CustomTextOfVerse(
                     text: verses, fontSize: 14, color: AppColor.secondaryColor)
               ],

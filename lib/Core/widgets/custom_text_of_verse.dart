@@ -19,7 +19,7 @@ class CustomTextOfVerse extends StatelessWidget {
       style: TextStyle(
           fontFamily: AppFont.jannaLt,
           color: color,
-          fontSize: fontSize,
+          fontSize: 12,
           fontWeight: AppFont.jannaLtBold),
     );
   }
