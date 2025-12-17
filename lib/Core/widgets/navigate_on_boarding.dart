@@ -61,7 +61,7 @@ class NavigateOnBoarding extends StatelessWidget {
                     duration: Duration(milliseconds: 250),
                     curve: Curves.easeIn);
               } else {
-                Navigator.of(context).pushNamed(HomeScreen.homeScreen);
+                Navigator.of(context).pushNamed(HomeScreen.routeName);
               }
             },
             text: "Next")
