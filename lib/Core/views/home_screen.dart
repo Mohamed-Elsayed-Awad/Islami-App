@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/Core/model/tap_info.dart';
 import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
+import 'package:islami_app/Core/utils/app_font.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "HomeScreen";
@@ -147,6 +148,42 @@ class QuranScreen extends StatelessWidget {
         SliverToBoxAdapter(
           child: Image.asset(AppAssets.topText),
         ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              cursorColor: AppColor.accentColor,
+              style: TextStyle(
+                fontFamily: AppFont.jannaLt,
+                color: AppColor.accentColor,
+              ),
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: AppColor.primaryColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(
+                    color: AppColor.primaryColor,
+                  ),
+                ),
+                hintText: "Sura Name",
+                hintStyle: TextStyle(
+                    fontFamily: AppFont.jannaLt,
+                    fontSize: 16,
+                    fontWeight: AppFont.jannaLtRegular,
+                    color: AppColor.accentColor),
+                prefixIcon: ImageIcon(
+                  AssetImage("assets/quranIcon.png"),
+                  color: AppColor.primaryColor,
+                ),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
