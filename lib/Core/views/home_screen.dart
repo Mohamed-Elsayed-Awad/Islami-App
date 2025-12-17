@@ -183,6 +183,19 @@ class QuranScreen extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0, left: 20, bottom: 10),
+            child: Text(
+              "Most Recently",
+              style: TextStyle(
+                  fontSize: 16,
+                  color: AppColor.accentColor,
+                  fontFamily: AppFont.jannaLt,
+                  fontWeight: AppFont.jannaLtBold),
+            ),
+          ),
         )
       ],
     );

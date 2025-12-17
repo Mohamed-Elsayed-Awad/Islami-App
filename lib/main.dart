@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/Core/views/home_screen.dart';
-import 'package:islami_app/Core/views/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());
