@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/Core/constants/app_color.dart';
+import 'package:islami_app/Core/utils/app_color.dart';
 
 class CustomIndicator extends StatelessWidget {
   const CustomIndicator({super.key, required this.isActive});

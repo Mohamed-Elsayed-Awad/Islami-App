@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/Core/constants/app_color.dart';
+import 'package:islami_app/Core/utils/app_color.dart';
 import 'package:islami_app/Core/widgets/board_screen.dart';
 import 'package:islami_app/Core/widgets/navigate_on_boarding.dart';
 

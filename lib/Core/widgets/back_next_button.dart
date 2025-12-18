@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/Core/constants/app_color.dart';
+import 'package:islami_app/Core/utils/app_color.dart';
 
 class BackNextButton extends StatelessWidget {
   const BackNextButton(
