@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:islami_app/Core/model/sura_model.dart';
 import 'package:islami_app/Core/model/tap_info.dart';
 import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
-import 'package:islami_app/Core/utils/app_font.dart';
-import 'package:islami_app/Core/widgets/custom_head_text.dart';
-import 'package:islami_app/Core/widgets/custom_text_of_sura.dart';
-import 'package:islami_app/Core/widgets/custom_text_of_verse.dart';
+import 'package:islami_app/Core/views/quran_view.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "HomeScreen";
@@ -23,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
       background: AppAssets.background,
       iconPath: AppAssets.quranIcon,
       label: 'Quran',
-      content: QuranScreen(),
+      content: QuranView(),
     ),
     TapInfo(
         background: AppAssets.background,
@@ -106,16 +102,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   AppColor.secondaryColor.withAlpha((0.6 * 255).toInt()),
               overlayColor: WidgetStatePropertyAll(AppColor.primaryColor),
               backgroundColor: AppColor.primaryColor,
-              destinations: List.generate(
-                listOfScreens.length,
-                (index) {
-                  return customNavigationDistination(
-                    iconPath: listOfScreens[index].iconPath,
-                    label: listOfScreens[index].label,
-                    isSelected: selectedIndex == index,
+              destinations: listOfScreens.map(
+                (screen) {
+                  int index = listOfScreens.indexOf(screen);
+                  return NavigationDestination(
+                    icon: ImageIcon(
+                      AssetImage(screen.iconPath),
+                      color: index == selectedIndex
+                          ? AppColor.accentColor
+                          : AppColor.secondaryColor,
+                    ),
+                    label: screen.label,
                   );
                 },
-              ),
+              ).toList(),
             ),
           ),
           body: listOfScreens[selectedIndex].content,
@@ -125,235 +125,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-customNavigationDistination(
-    {required String iconPath,
-    required String label,
-    required bool isSelected}) {
-  return NavigationDestination(
-    icon: ImageIcon(AssetImage(iconPath),
-        color: isSelected ? AppColor.accentColor : AppColor.secondaryColor),
-    label: label,
-    selectedIcon: isSelected
-        ? ImageIcon(
-            AssetImage(iconPath),
-            color: AppColor.accentColor,
-          )
-        : null,
-  );
-}
 
-class QuranScreen extends StatelessWidget {
-  QuranScreen({super.key});
-  List<SuraItem> listOfSura = [
-    SuraItem(
-      suraModel: SuraModel(
-        suraNumber: '1',
-        englishName: 'Al-Fatiha',
-        arabicName: 'الفاتحة',
-        verses: '7 Verses',
-      ),
-    )
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverToBoxAdapter(
-          child: Image.asset(
-            width: 200,
-            height: 200,
-            AppAssets.topText,
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              cursorColor: AppColor.accentColor,
-              style: TextStyle(
-                fontFamily: AppFont.jannaLt,
-                color: AppColor.accentColor,
-              ),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: AppColor.primaryColor,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(
-                    color: AppColor.primaryColor,
-                  ),
-                ),
-                hintText: "Sura Name",
-                hintStyle: TextStyle(
-                    fontFamily: AppFont.jannaLt,
-                    fontSize: 16,
-                    fontWeight: AppFont.jannaLtRegular,
-                    color: AppColor.accentColor),
-                prefixIcon: ImageIcon(
-                  AssetImage("assets/quranIcon.png"),
-                  color: AppColor.primaryColor,
-                ),
-              ),
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20.0, left: 20, bottom: 10),
-            child: CustomHeadText(
-              text: "Most Recently",
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: SizedBox(
-            height: 120,
-            child: ListView.builder(
-              padding: EdgeInsets.only(left: 20),
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return MostRecentlySura(
-                  englsihName: 'Al-Anbiya',
-                  arabicName: 'الأنبياء',
-                  verses: '112 Verses',
-                );
-              },
-              itemCount: 5,
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: CustomHeadText(text: "Sura List"),
-          ),
-        ),
-        SliverList.separated(
-          itemBuilder: (context, index) {
-            return listOfSura[0];
-          },
-          itemCount: 20,
-          separatorBuilder: (BuildContext context, int index) {
-            return Divider(
-              indent: 64,
-              endIndent: 50,
-              color: AppColor.accentColor,
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class SuraItem extends StatelessWidget {
-  const SuraItem({
-    super.key,
-    required this.suraModel,
-  });
-  final SuraModel suraModel;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    "assets/img_sur_number_frame.png",
-                  ),
-                  Text(
-                    suraModel.suraNumber,
-                    style: TextStyle(
-                        color: AppColor.accentColor,
-                        fontFamily: AppFont.jannaLt,
-                        fontSize: 14,
-                        fontWeight: AppFont.jannaLtBold),
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 24,
-              ),
-              Column(
-                children: [
-                  CustomTextOfSura(
-                    text: suraModel.englishName,
-                    color: AppColor.accentColor,
-                    fontSize: 20,
-                  ),
-                  CustomTextOfVerse(
-                      text: suraModel.verses,
-                      fontSize: 14,
-                      color: AppColor.accentColor)
-                ],
-              ),
-            ],
-          ),
-          CustomTextOfSura(
-            text: suraModel.arabicName,
-            color: AppColor.accentColor,
-            fontSize: 20,
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class MostRecentlySura extends StatelessWidget {
-  const MostRecentlySura({
-    super.key,
-    required this.englsihName,
-    required this.arabicName,
-    required this.verses,
-  });
-  final String englsihName;
-  final String arabicName;
-  final String verses;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: Container(
-        padding: EdgeInsets.all(8),
-        height: 120,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: AppColor.primaryColor),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                CustomTextOfSura(
-                  text: englsihName,
-                  color: AppColor.secondaryColor,
-                  fontSize: 24,
-                ),
-                CustomTextOfSura(
-                  text: arabicName,
-                  color: AppColor.secondaryColor,
-                  fontSize: 24,
-                ),
-                CustomTextOfVerse(
-                    text: verses, fontSize: 14, color: AppColor.secondaryColor)
-              ],
-            ),
-            Image.asset("assets/img_most_recent.png"),
-          ],
-        ),
-      ),
-    );
-  }
-}
