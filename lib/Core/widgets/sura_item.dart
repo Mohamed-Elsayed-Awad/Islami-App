@@ -29,7 +29,7 @@ class SuraItem extends StatelessWidget {
                       "assets/img_sur_number_frame.png",
                     ),
                     Text(
-                      suraModel.suraNumber,
+                      "${suraModel.suraNumber + 1}",
                       style: TextStyle(
                           color: AppColor.accentColor,
                           fontFamily: AppFont.jannaLt,
@@ -51,7 +51,7 @@ class SuraItem extends StatelessWidget {
                       fontSize: 20,
                     ),
                     CustomTextOfVerse(
-                        text: suraModel.verses,
+                        text: "${suraModel.verses} Verses",
                         fontSize: 14,
                         color: AppColor.accentColor)
                   ],

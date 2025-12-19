@@ -9,17 +9,10 @@ import 'package:islami_app/Core/widgets/sura_item.dart';
 
 class QuranView extends StatelessWidget {
   QuranView({super.key});
-  List<SuraModel> listOfSura = [
-    SuraModel(
-      suraNumber: '1',
-      englishName: 'Al-Fatiha',
-      arabicName: 'الفاتحة',
-      verses: '7 Verses',
-    ),
-  ];
+
   List<SuraModel> listOFMostRecently = [
     SuraModel(
-      suraNumber: '1',
+      suraNumber: 1,
       englishName: 'Al-Fatiha',
       arabicName: 'الفاتحة',
       verses: '7 Verses',
@@ -66,9 +59,18 @@ class QuranView extends StatelessWidget {
           child: ListView.separated(
             padding: EdgeInsets.all(0),
             itemBuilder: (context, index) {
-              return SuraItem(suraModel: listOfSura[0]);
+              return GestureDetector(
+                onTap: () {
+                },
+                child: SuraItem(
+                    suraModel: SuraModel(
+                        suraNumber: index,
+                        englishName: SuraModel.englishQuranSurahs[index],
+                        arabicName: SuraModel.arabicAuranSuras[index],
+                        verses: SuraModel.ayaNumber[index])),
+              );
             },
-            itemCount: 10,
+            itemCount: SuraModel.arabicAuranSuras.length,
             separatorBuilder: (BuildContext context, int index) {
               return Divider(
                 indent: 64,
