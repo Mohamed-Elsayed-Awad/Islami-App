@@ -10,7 +10,7 @@ class SuraModel {
     required this.verses,
   });
 
-   static const List<String> arabicAuranSuras = [
+  static const List<String> arabicAuranSuras = [
     "الفاتحه",
     "البقرة",
     "آل عمران",
@@ -199,8 +199,8 @@ class SuraModel {
     "Al-Ma'arij",
     "Nuh",
     "Al-Jinn",
-    "Al-Muzzammil",
-    "Al-Muddathir",
+    "Al-Muzamil",
+    "Al-Mudathir",
     "Al-Qiyamah",
     "Al-Insan",
     "Al-Mursalat",
@@ -209,7 +209,7 @@ class SuraModel {
     "Abasa",
     "At-Takwir",
     "Al-Infitar",
-    "Al-Mutaffifin",
+    "Al-Mutafifin",
     "Al-Inshiqaq",
     "Al-Buruj",
     "At-Tariq",
@@ -358,6 +358,4 @@ class SuraModel {
     '5',
     '6'
   ];
-
-
 }

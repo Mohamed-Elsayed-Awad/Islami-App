@@ -15,34 +15,41 @@ class MostRecentlySura extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(right: 8.0),
       child: Container(
-        padding: EdgeInsets.all(8),
-        height: 120,
+        padding: EdgeInsets.all(16),
+        width: 280,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: AppColor.primaryColor),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomTextOfSura(
                   text: suraModel.englishName,
                   color: AppColor.secondaryColor,
-                  fontSize: 24,
+                  fontSize: 20,
                 ),
                 CustomTextOfSura(
                   text: suraModel.arabicName,
                   color: AppColor.secondaryColor,
-                  fontSize: 24,
+                  fontSize: 20,
+                ),
+                SizedBox(
+                  height: 8,
                 ),
                 CustomTextOfVerse(
-                    text: suraModel.verses,
-                    fontSize: 14,
+                    text: "${suraModel.verses} Verses",
+                    fontSize: 12,
                     color: AppColor.secondaryColor)
               ],
             ),
-            Image.asset("assets/img_most_recent.png"),
+            Image.asset(
+              "assets/img_most_recent.png",
+              scale: 1.3,
+            ),
           ],
         ),
       ),
