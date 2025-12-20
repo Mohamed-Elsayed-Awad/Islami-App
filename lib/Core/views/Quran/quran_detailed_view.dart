@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/Core/model/sura_model.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
 import 'package:islami_app/Core/utils/app_font.dart';
+import 'package:islami_app/Core/widgets/decorated_head_line_of_detailed_sura.dart';
 
 class QuranDetailedView extends StatelessWidget {
   const QuranDetailedView({super.key});
@@ -41,21 +42,7 @@ class QuranDetailedView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Image.asset("assets/img_left_corner.png"),
-                    Text(
-                      SuraModel.arabicAuranSuras[index],
-                      style: TextStyle(
-                          color: AppColor.primaryColor,
-                          fontFamily: AppFont.jannaLt,
-                          fontWeight: AppFont.jannaLtMedium,
-                          fontSize: 24),
-                    ),
-                    Image.asset("assets/img_right_corner.png")
-                  ],
-                ),
+                DecoratedHeadLineOfDetailedSura(index: index),
               ],
             ),
           ),

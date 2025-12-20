@@ -10,7 +10,7 @@ import 'package:islami_app/Core/widgets/most_recently_sura.dart';
 import 'package:islami_app/Core/widgets/sura_item.dart';
 
 class QuranView extends StatefulWidget {
-  QuranView({super.key});
+  const QuranView({super.key});
   static const String routeName = "QuranView";
 
   @override
@@ -19,6 +19,10 @@ class QuranView extends StatefulWidget {
 
 class _QuranViewState extends State<QuranView> {
   List<SuraModel> listOFMostRecently = [];
+  void addMostRecently(SuraModel sura) {
+    listOFMostRecently.removeWhere((s) => s.suraNumber == sura.suraNumber);
+    listOFMostRecently.insert(0, sura);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,23 +78,16 @@ class _QuranViewState extends State<QuranView> {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  bool exist = listOFMostRecently
-                      .any((object) => object.suraNumber == index);
-                  if (!exist) {
-                    listOFMostRecently.insert(
-                      0,
-                      SuraModel(
-                          suraNumber: index,
-                          englishName: SuraModel.englishQuranSurahs[index],
-                          arabicName: SuraModel.arabicAuranSuras[index],
-                          verses: SuraModel.ayaNumber[index]),
-                    );
-                  }
+                  addMostRecently(SuraModel(
+                      suraNumber: index,
+                      englishName: SuraModel.englishQuranSurahs[index],
+                      arabicName: SuraModel.arabicAuranSuras[index],
+                      verses: SuraModel.ayaNumber[index]));
 
                   Navigator.of(context)
                       .pushNamed(QuranDetailedView.routeName, arguments: index)
-                      .then((index) {
-                    if (index == true) {
+                      .then((set) {
+                    if (set == true) {
                       setState(() {});
                     }
                   });
