@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/Core/views/Quran/quran_detailed_view.dart';
+import 'package:islami_app/Core/views/Quran/quran_view.dart';
 import 'package:islami_app/Core/views/home_screen.dart';
 
 void main() {
@@ -14,6 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         HomeScreen.routeName: (_) => HomeScreen(),
+        QuranDetailedView.routeName: (_) => QuranDetailedView(),
+        QuranView.routeName: (_) => QuranView(),
       },
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),

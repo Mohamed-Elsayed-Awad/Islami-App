@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/Core/model/tap_info.dart';
 import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
-import 'package:islami_app/Core/views/quran_view.dart';
+import 'package:islami_app/Core/views/Quran/quran_view.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "HomeScreen";
