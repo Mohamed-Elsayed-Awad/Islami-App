@@ -1,50 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:islami_app/Core/model/sura_model.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
 import 'package:islami_app/Core/utils/app_font.dart';
-import 'package:islami_app/Core/widgets/decorated_head_line_of_detailed_sura.dart';
 
-class QuranDetailedView extends StatefulWidget {
-  const QuranDetailedView({super.key});
-  static const String routeName = "QuranDetailedView";
-
-  @override
-  State<QuranDetailedView> createState() => _QuranDetailedViewState();
-}
-
-class _QuranDetailedViewState extends State<QuranDetailedView> {
-  List<String> fileContent = [];
-  late int index;
-  String content = "";
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    index = ModalRoute.of(context)!.settings.arguments as int;
-    loadFile();
-  }
-
-  Future<void> loadFile() async {
-    final data = await rootBundle.loadString("assets/Suras/${index + 1}.txt");
-    fileContent = data.split("\n");
-    String linesOfSura = "";
-    for (var i = 0; i < fileContent.length; i++) {
-      if (fileContent[i] == " ") {
-        continue;
-      } else {
-        linesOfSura += " ${fileContent[i]} [${i + 1}]";
-      }
-    }
-    setState(() {
-      content = linesOfSura;
-    });
-  }
-
+class HadethDetailedView extends StatelessWidget {
+  const HadethDetailedView(
+      {super.key,
+      required this.englishTitle,
+      required this.arabicTitle,
+      required this.content});
+  static const String routeName = "DetailedView";
+  final String englishTitle;
+  final String arabicTitle;
+  final String content;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.secondaryColor.withOpacity(1),
+      backgroundColor: AppColor.secondaryColor,
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
@@ -58,7 +31,7 @@ class _QuranDetailedViewState extends State<QuranDetailedView> {
         backgroundColor: AppColor.secondaryColor,
         iconTheme: IconThemeData(color: const Color.fromARGB(255, 15, 13, 10)),
         title: Text(
-          SuraModel.englishQuranSurahs[index],
+          englishTitle,
           style: TextStyle(
               color: AppColor.primaryColor,
               fontFamily: AppFont.jannaLt,
@@ -70,7 +43,21 @@ class _QuranDetailedViewState extends State<QuranDetailedView> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          DecoratedHeadLineOfDetailedSura(index: index),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset("assets/img_left_corner.png"),
+              Text(
+                arabicTitle,
+                style: TextStyle(
+                    color: AppColor.primaryColor,
+                    fontFamily: AppFont.jannaLt,
+                    fontWeight: AppFont.jannaLtMedium,
+                    fontSize: 24),
+              ),
+              Image.asset("assets/img_right_corner.png")
+            ],
+          ),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/Core/model/tap_info.dart';
 import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
+import 'package:islami_app/Core/views/Hadeth/hadeth_view.dart';
 import 'package:islami_app/Core/views/Quran/quran_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,18 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
       content: QuranView(),
     ),
     TapInfo(
-        background: AppAssets.background,
+        background: AppAssets.hadethBackground,
         iconPath: AppAssets.hadeethIcon,
         label: 'Hadeth',
-        content: Center(
-          child: Text(
-            'Hadeth',
-            style: TextStyle(
-                color: AppColor.accentColor,
-                fontSize: 30,
-                fontWeight: FontWeight.bold),
-          ),
-        )),
+        content: HadethView()),
     TapInfo(
         background: AppAssets.background,
         iconPath: AppAssets.sebhaIcon,
@@ -76,53 +69,66 @@ class _HomeScreenState extends State<HomeScreen> {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset(
-            listOfScreens[selectedIndex].background,
-            fit: BoxFit.fill,
+          child: Opacity(
+            opacity: 0.2,
+            child: Image.asset(
+              listOfScreens[selectedIndex].background,
+              fit: BoxFit.fill,
+            ),
           ),
         ),
         Scaffold(
-          backgroundColor: Colors.transparent,
-          bottomNavigationBar: NavigationBarTheme(
-            data: NavigationBarThemeData(
-              labelTextStyle: WidgetStatePropertyAll(
-                TextStyle(color: AppColor.accentColor),
+            backgroundColor: Colors.transparent,
+            bottomNavigationBar: NavigationBarTheme(
+              data: NavigationBarThemeData(
+                labelTextStyle: WidgetStatePropertyAll(
+                  TextStyle(color: AppColor.accentColor),
+                ),
+              ),
+              child: NavigationBar(
+                labelBehavior:
+                    NavigationDestinationLabelBehavior.onlyShowSelected,
+                onDestinationSelected: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                selectedIndex: selectedIndex,
+                indicatorColor:
+                    AppColor.secondaryColor.withAlpha((0.6 * 255).toInt()),
+                overlayColor: WidgetStatePropertyAll(AppColor.primaryColor),
+                backgroundColor: AppColor.primaryColor,
+                destinations: listOfScreens.map(
+                  (screen) {
+                    int index = listOfScreens.indexOf(screen);
+                    return NavigationDestination(
+                      icon: ImageIcon(
+                        AssetImage(screen.iconPath),
+                        color: index == selectedIndex
+                            ? AppColor.accentColor
+                            : AppColor.secondaryColor,
+                      ),
+                      label: screen.label,
+                    );
+                  },
+                ).toList(),
               ),
             ),
-            child: NavigationBar(
-              labelBehavior:
-                  NavigationDestinationLabelBehavior.onlyShowSelected,
-              onDestinationSelected: (index) {
-                setState(() {
-                  selectedIndex = index;
-                });
-              },
-              selectedIndex: selectedIndex,
-              indicatorColor:
-                  AppColor.secondaryColor.withAlpha((0.6 * 255).toInt()),
-              overlayColor: WidgetStatePropertyAll(AppColor.primaryColor),
-              backgroundColor: AppColor.primaryColor,
-              destinations: listOfScreens.map(
-                (screen) {
-                  int index = listOfScreens.indexOf(screen);
-                  return NavigationDestination(
-                    icon: ImageIcon(
-                      AssetImage(screen.iconPath),
-                      color: index == selectedIndex
-                          ? AppColor.accentColor
-                          : AppColor.secondaryColor,
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Center(
+                    child: Image.asset(
+                      width: 200,
+                      height: 120,
+                      AppAssets.topText,
                     ),
-                    label: screen.label,
-                  );
-                },
-              ).toList(),
-            ),
-          ),
-          body: listOfScreens[selectedIndex].content,
-        )
+                  ),
+                  Expanded(child: listOfScreens[selectedIndex].content),
+                ],
+              ),
+            ))
       ],
     );
   }
 }
-
-
