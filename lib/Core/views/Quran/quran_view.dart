@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/Core/model/sura_model.dart';
-import 'package:islami_app/Core/utils/app_assets.dart';
 import 'package:islami_app/Core/utils/app_color.dart';
 import 'package:islami_app/Core/utils/app_font.dart';
 import 'package:islami_app/Core/views/Quran/quran_detailed_view.dart';
@@ -29,13 +28,6 @@ class _QuranViewState extends State<QuranView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
-          child: Image.asset(
-            width: 200,
-            height: 200,
-            AppAssets.topText,
-          ),
-        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: CustomTextFeild(),
@@ -62,8 +54,20 @@ class _QuranViewState extends State<QuranView> {
                   padding: EdgeInsets.only(left: 20),
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
-                    return MostRecentlySura(
-                        suraModel: listOFMostRecently[index]);
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(QuranDetailedView.routeName,
+                                arguments: listOFMostRecently[index].suraNumber)
+                            .then((onValue) {
+                          if (onValue == true) {
+                            setState(() {});
+                          }
+                        });
+                      },
+                      child: MostRecentlySura(
+                          suraModel: listOFMostRecently[index]),
+                    );
                   },
                   itemCount: listOFMostRecently.length,
                 ),

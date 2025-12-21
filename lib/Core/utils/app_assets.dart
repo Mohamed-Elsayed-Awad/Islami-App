@@ -1,5 +1,6 @@
 class AppAssets {
   static const String background = "assets/Background.png";
+  static const String hadethBackground = "assets/hadithbackground.png";
   static const String topText = "assets/topText.png";
   static const String quranIcon = "assets/quranIcon.png";
   static const String hadeethIcon = "assets/hadeethIcon.png";
