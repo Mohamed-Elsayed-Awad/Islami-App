@@ -3,21 +3,16 @@ import 'package:islami/Core/utils/app_color.dart';
 import 'package:islami/Core/widgets/board_screen.dart';
 import 'package:islami/Core/widgets/navigate_on_boarding.dart';
 
-
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
-
+  static const String routeName = "onBoardingScreen";
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final List<Widget> listOfScreens = [
-    BoardScreen(
-      text: "",
-      imgNum: "1",
-      headline: 'Welcome To Islmi App',
-    ),
+    BoardScreen(text: "", imgNum: "1", headline: 'Welcome To Islmi App'),
     BoardScreen(
       text: "We Are Very Excited To Have You In Our Community",
       imgNum: "2",
@@ -64,7 +59,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             NavigateOnBoarding(
-                currentIndex: currentIndex, controller: controller),
+              currentIndex: currentIndex,
+              controller: controller,
+            ),
           ],
         ),
       ),

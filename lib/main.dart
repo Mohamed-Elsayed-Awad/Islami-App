@@ -5,8 +5,10 @@ import 'package:islami/Core/views/Quran/quran_view.dart';
 import 'package:islami/Core/utils/shared_most_recently.dart';
 import 'package:islami/Core/utils/shared_sebha.dart';
 import 'package:islami/Core/views/home_screen.dart';
+import 'package:islami/Core/views/onboarding_screen.dart';
 
-final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
+final RouteObserver<ModalRoute<void>> routeObserver =
+    RouteObserver<ModalRoute<void>>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedSebha.init();
@@ -22,11 +24,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      initialRoute: OnboardingScreen.routeName,
       navigatorObservers: [routeObserver],
       routes: {
         HomeScreen.routeName: (_) => HomeScreen(),
         QuranDetailedView.routeName: (_) => QuranDetailedView(),
         QuranView.routeName: (_) => QuranView(),
+        OnboardingScreen.routeName: (_) => OnboardingScreen(),
       },
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
